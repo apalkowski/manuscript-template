@@ -1,0 +1,258 @@
+% Configuration file for producing journal manuscripts in LaTeX.
+
+\newcommand*{\myman@date}{2018/10/04}
+\newcommand*{\myman@version}{1.0}
+\newcommand*{\myman@name}{mymanuscript}
+\newcommand*{\myman@description}{Journal manuscript package}
+
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{\myman@name}[\myman@date\space v\myman@version\space \myman@description]
+
+\message{`\myman@name' v\myman@version, \myman@date\space \myman@description}
+
+%%% ETOOLBOX
+
+\RequirePackage{etoolbox}
+
+%%% PACKAGE OPTIONS
+
+\DeclareOption{hidelinks}{%
+  \AtEndOfPackage{\hypersetup{hidelinks}}%
+}
+
+\newtoggle{myman@endfloat}
+\DeclareOption{endfloat}{%
+  \toggletrue{myman@endfloat}%
+}
+
+\newtoggle{myman@nopics}
+\DeclareOption{nopics}{%
+  \toggletrue{myman@nopics}%
+}
+
+\newtoggle{myman@nolineno}
+\DeclareOption{nolineno}{%
+  \toggletrue{myman@nolineno}%
+}
+
+\DeclareOption*{%
+  \PackageWarning{\myman@name}{Unknown option `\CurrentOption'}%
+}
+
+\ProcessOptions\relax
+
+%%% PACKAGES
+
+% Page layout
+\RequirePackage{geometry}
+\geometry{paper=a4paper}
+\geometry{margin=2.5cm}
+% \geometry{top=2.5cm}% margin
+% \geometry{bottom=2.5cm}% margin
+% \geometry{left=2.5cm}% margin
+% \geometry{right=2.5cm}% margin
+
+% Document encoding
+\RequirePackage[T1]{fontenc}
+
+\RequirePackage[utf8]{inputenc}
+
+% Mathematics
+\RequirePackage{mathtools}
+
+\newcommand*{\imgunit}{\ensuremath{\mathrm{i}}}
+
+% Language
+\RequirePackage[british]{babel}
+
+% Fonts
+\RequirePackage{newtxtext}
+\RequirePackage{newtxmath}
+
+\RequirePackage[varl]{inconsolata}
+
+% Units
+\RequirePackage[binary-units]{siunitx}
+\sisetup{%
+  per-mode=symbol,
+  group-separator={,},
+  group-digits=integer,
+  group-minimum-digits=4,
+  list-final-separator={, and },
+  range-phrase={--},
+  list-units=single,
+  range-units=single,
+  detect-all,
+}
+\ExplSyntaxOn%
+\cs_new_eq:NN \siunitx_table_collect_begin:Nn \__siunitx_table_collect_begin:Nn%
+\ExplSyntaxOff%
+\DeclareSIUnit[number-unit-product={},list-units=repeat,range-units=repeat]\percent{\%}
+
+% Tables and colors
+\newcommand*{\myman@tablefont}{\footnotesize}
+\newcommand*{\myman@tablenotefont}{\scriptsize}
+
+\RequirePackage{array}
+
+\RequirePackage[table,fixpdftex,hyperref]{xcolor}
+
+\RequirePackage{longtable}
+
+\RequirePackage[referable]{threeparttablex}
+\setTableNoteFont{\myman@tablenotefont}
+\renewcommand{\TPTLnotesnamefontcommand}{}
+
+\RequirePackage{tabu}
+\tabulinesep=1ex
+\AtBeginEnvironment{tabu}{\myman@tablefont}
+
+\RequirePackage{booktabs}
+
+\newcommand*{\includetable}[1]{\input{tables/#1}}
+
+% Graphics
+\newlength{\maxfullpagewidth}
+\deflength{\maxfullpagewidth}{175mm}
+\newlength{\maxhalfpagewidth}
+\deflength{\maxhalfpagewidth}{84mm}
+
+\RequirePackage{graphicx}
+\DeclareGraphicsExtensions{.pdf}
+
+\iftoggle{myman@nopics}{%
+  \renewcommand{\includegraphics}[1]{}%
+}{}
+
+% Captions
+\RequirePackage{caption}
+\captionsetup{format=plain}
+\captionsetup{justification=centering}
+\captionsetup[figure]{name=Figure}
+\captionsetup[table]{name=Table}
+\captionsetup{font=footnotesize}
+\captionsetup{labelfont=normalfont}
+\captionsetup{labelsep=period}
+\captionsetup[figure]{textformat=period}
+\captionsetup[table]{textformat=period}
+\captionsetup{singlelinecheck=false}
+
+% Typography
+\RequirePackage[nodisplayskipstretch]{setspace}
+\onehalfspacing%
+\AtBeginDocument{%
+  \deflength{\belowdisplayshortskip}{\belowdisplayskip}%
+}
+
+\RequirePackage{enumitem}
+\setlist{noitemsep}
+
+\RequirePackage{csquotes}
+
+\RequirePackage{hyphenat}
+
+\RequirePackage{float}
+\floatplacement{figure}{!htb}
+\floatplacement{table}{!htb}
+
+\iftoggle{myman@endfloat}{%
+  \RequirePackage[nolists,heads,nomarkers,tablesfirst]{endfloat}%
+  \iftoggle{myman@nopics}{%
+    \renewcommand{\figuresection}{Figure captions}%
+  }{%
+    \renewcommand{\figuresection}{Figures}%
+  }%
+}{}
+
+\RequirePackage{microtype}
+\microtypesetup{babel=true}
+
+\brokenpenalty=1000
+\clubpenalty=10000
+\widowpenalty=10000
+
+% Authors and affiliations block
+\RequirePackage{authblk}
+\renewcommand{\Affilfont}{\normalsize}
+
+\newcommand*{\email}[1]{\href{mailto:#1}{\nolinkurl{#1}}}
+
+\newcommand{\corrauthor}[1]{%
+  \apptocmd{\maketitle}{%
+    \vspace{-3em}%
+    \begin{center}\footnotesize%
+      #1%
+    \end{center}%
+    \vspace{1em}%
+  }{}{}%
+}
+
+\pretocmd{\maketitle}{\begin{singlespacing}}{}{}%
+\apptocmd{\maketitle}{\end{singlespacing}}{}{}%
+
+% Bibliography
+\RequirePackage[backend=biber,style=ieee]{biblatex}
+% \ExecuteBibliographyOptions{sorting=none}
+% \ExecuteBibliographyOptions{giveninits=true}
+% \ExecuteBibliographyOptions{url=true}
+% \ExecuteBibliographyOptions{isbn=false}
+% \ExecuteBibliographyOptions{doi=true}
+% \ExecuteBibliographyOptions{autocite=plain}
+% \ExecuteBibliographyOptions{autopunct=true}
+\ExecuteBibliographyOptions{maxbibnames=5}
+\ExecuteBibliographyOptions{minbibnames=3}
+\ExecuteBibliographyOptions{maxcitenames=2}
+\ExecuteBibliographyOptions{mincitenames=1}
+
+\AtEveryBibitem{%
+  \ifentrytype{misc}{%
+  }{%
+    \clearfield{url}%
+  }%
+}
+
+\DeclareCiteCommand{\numcite}{%
+  \usebibmacro{cite:init}\usebibmacro{prenote}%
+}{%
+  \usebibmacro{citeindex}\usebibmacro{cite:comp}%
+}{}{%
+  \usebibmacro{cite:dump}\usebibmacro{postnote}%
+}
+
+\pretocmd{\printbibliography}{\begin{singlespacing}}{}{}%
+\apptocmd{\printbibliography}{\end{singlespacing}}{}{}%
+
+% Line numbers
+\iftoggle{myman@nolineno}{}{%
+  \RequirePackage{lineno}%
+  \modulolinenumbers[5]%
+  \AfterEndEnvironment{abstract}{\linenumbers}%
+  \pretocmd{\printbibliography}{\nolinenumbers}{}{}%
+  \apptocmd{\printbibliography}{\linenumbers}{}{}%
+}
+
+% Links
+\RequirePackage{hyperref}
+\hypersetup{colorlinks=true}
+\hypersetup{linkcolor=blue}
+\hypersetup{anchorcolor=blue}
+\hypersetup{citecolor=blue}
+\hypersetup{menucolor=blue}
+\hypersetup{runcolor=blue}
+\hypersetup{urlcolor=magenta}
+\hypersetup{filecolor=cyan}
+\hypersetup{unicode=true}
+
+% Glossary
+\RequirePackage[acronym,nohypertypes={main,acronym}]{glossaries}
+
+% Cross-ref­er­enc­ing
+\RequirePackage{cleveref}
+\crefname{figure}{Fig.}{Fig.}
+\Crefname{figure}{Figure}{Figures}
+\crefname{table}{Tab.}{Tab.}
+\Crefname{table}{Table}{Tables}
+\crefname{equation}{Eq.}{Eq.}
+\Crefname{equation}{Equation}{Equations}
+\newcommand{\crefrangeconjunction}{--}
+\newcommand{\creflastconjunction}{, and }

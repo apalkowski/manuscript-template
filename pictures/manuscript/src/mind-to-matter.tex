@@ -1,0 +1,16 @@
+\documentclass{../../config/mytexpicture}
+
+\tikzset{%
+  block/.style={draw,shape=rectangle,align=center},
+}
+
+\begin{document}
+
+\begin{tikzpicture}[node distance=2cm]
+  \node[block] (mind) {Mind};
+  \node[block,right=of mind] (matter) {Matter};
+
+  \draw[arrow] (mind) -- (matter);
+\end{tikzpicture}
+
+\end{document}

@@ -1,0 +1,92 @@
+\documentclass[12pt]{article}
+
+\usepackage{config/mymanuscript}
+
+\input{config/titlepage}
+\input{config/glossary}
+
+\graphicspath{{../pictures/manuscript/}}
+\addbibresource{bibliography.bib}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec blandit libero et dolor vehicula condimentum. Donec sit amet sagittis tellus. Quisque et faucibus leo, eget rhoncus enim. Nunc pretium mauris eget lorem scelerisque, at tempus ante volutpat. Vestibulum non rutrum risus. Nullam suscipit ultrices tristique. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec a neque id justo hendrerit placerat in id sapien. Nam porta purus eget dui posuere, tincidunt gravida odio tincidunt. Sed id metus congue, volutpat turpis quis, rutrum nibh. Nulla dapibus velit quis sapien euismod, vitae pretium erat rhoncus.
+\end{abstract}
+
+\clearpage
+\section{Introduction}
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit \cref{fig:applemato}. Suspendisse porta arcu sit amet elit maximus posuere \gls{sbbh}. Nam pharetra auctor arcu, sed posuere augue condimentum eu~\autocite{Capek2004}. Nam egestas erat laoreet lectus efficitur, non volutpat lacus accumsan. Donec id nisl sapien:
+%
+\begin{itemize}
+  \item doughnuts,
+  \item lasers,
+  \item unicorns.
+\end{itemize}
+
+\begin{figure}
+	\centering
+	\includegraphics{applemato}
+	\caption{An apple or a tomato}%
+	\label{fig:applemato}
+\end{figure}
+
+\section{Methods}
+
+Ut fringilla leo velit, quis scelerisque velit sagittis sed \( i,j,k=1,\dotsc,n \). Etiam lobortis nisi risus \cref{eq:energy}, eget placerat nulla lobortis sed. Curabitur consectetur mattis mauris nec tempus \cref{fig:mind-to-matter}.
+%
+\begin{equation}\label{eq:energy}
+	e = m c^2
+\end{equation}
+
+\begin{figure}
+	\centering
+	\includegraphics{mind-to-matter}
+	\caption{Just concentrate}%
+	\label{fig:mind-to-matter}
+\end{figure}
+
+\section{Results}
+
+Mauris orci quam, lobortis dictum elit vel, pellentesque congue leo \gls{sbbh}. Morbi blandit neque a dolor iaculis varius. Duis mi erat, convallis sit amet consectetur a, dapibus vitae turpis \cref{tab:cakes}. Sed posuere aliquam tortor, vel blandit libero vehicula sit amet \cref{fig:adam}. Aenean nec leo a eros condimentum dictum nec ac lorem~\autocite{Einstein1935,Hawking1975}.
+
+\begin{table}
+	\centering
+	\caption{Meaningless cake statistics}%
+	\label{tab:cakes}
+	\includetable{cakes}
+\end{table}
+
+\begin{figure}
+	\centering
+	\includegraphics{adam}
+	\caption{The creation of derp: (\textbf{a})~someone pulls his hand up, (\textbf{b})~someone pulls his hand down}%
+	\label{fig:adam}
+\end{figure}
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit \cref{fig:prices}. Mauris sed bibendum arcu, non sollicitudin metus. Ut ut faucibus odio. Praesent maximus erat ut metus vestibulum ullamcorper \cref{fig:excitement}.
+
+\begin{figure}
+	\centering
+	\includegraphics{prices}
+	\caption{Changes in the price of a beetroot}%
+	\label{fig:prices}
+\end{figure}
+
+\begin{figure}
+	\centering
+	\includegraphics{excitement}
+	\caption{Increase in excitement: (\textbf{a})~seeing a baby, (\textbf{b})~seeing a seal}%
+	\label{fig:excitement}
+\end{figure}
+
+\section{Conclusions}
+
+Cras viverra \enquote{ultricies venenatis}. Etiam sed diam quis dui posuere vulputate. In feugiat leo erat, sed euismod mauris imperdiet sed. Sed ultricies non nibh vitae varius. Maecenas malesuada, urna a eleifend ullamcorper, orci justo volutpat mauris, ac finibus justo leo in mauris. Mauris a commodo nulla.
+
+\printbibliography%
+
+\end{document}
