@@ -192,17 +192,6 @@
 
 % Bibliography
 \RequirePackage[backend=biber,style=ieee]{biblatex}
-% \ExecuteBibliographyOptions{sorting=none}
-% \ExecuteBibliographyOptions{giveninits=true}
-% \ExecuteBibliographyOptions{url=true}
-% \ExecuteBibliographyOptions{isbn=false}
-% \ExecuteBibliographyOptions{doi=true}
-% \ExecuteBibliographyOptions{autocite=plain}
-% \ExecuteBibliographyOptions{autopunct=true}
-\ExecuteBibliographyOptions{maxbibnames=5}
-\ExecuteBibliographyOptions{minbibnames=3}
-\ExecuteBibliographyOptions{maxcitenames=2}
-\ExecuteBibliographyOptions{mincitenames=1}
 
 \AtEveryBibitem{%
   \ifentrytype{misc}{%
@@ -223,7 +212,8 @@
 \apptocmd{\printbibliography}{\end{singlespacing}}{}{}%
 
 % Line numbers
-\iftoggle{myman@nolineno}{}{%
+\iftoggle{myman@nolineno}{%
+}{%
   \RequirePackage{lineno}%
   \modulolinenumbers[5]%
   \AfterEndEnvironment{abstract}{\linenumbers}%
