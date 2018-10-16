@@ -1,11 +1,14 @@
 % !TEX root = ../main.tex
 
-\begin{tabu} spread 0pt {X[l] *{2}{X[c]}}
+\newcolumntype Z{X[c]{S[round-mode=places,round-precision=2,round-integer-to-decimal=true]}}% ChkTeX 1
+\tabucolumn Z% chktex 1
+
+\begin{tabu} spread 0pt {X[l] *{2}{Z}}
 	\toprule
-	Cake        & Mean       & Std        \\
+	Cake        & {Mean} & {Std} \\
 	\midrule
-	cheesecake  & \num{3.14} & \num{0.86} \\
-	gingerbread & \num{5.1}  & \num{1.01} \\
-	apple pie   & \num{11}   & \num{2.9}  \\
+	cheesecake  & 3.14   & 0.86  \\
+	gingerbread & 5.1    & 1.01  \\
+	apple pie   & 11     & 2.9   \\
 	\bottomrule
 \end{tabu}
