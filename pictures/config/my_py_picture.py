@@ -74,7 +74,7 @@ opsys = platform.system()
 if opsys == 'Windows':
     lang = 'en'
 else:
-    lang = 'en_GB.utf8'
+    lang = ('en_GB', 'UTF-8')
 locale.setlocale(locale.LC_ALL, lang)
 
 mpl.rcdefaults()
