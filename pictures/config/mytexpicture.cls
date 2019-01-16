@@ -115,7 +115,7 @@
   arrow/.style={->,>=Latex,draw},
   txt/.style={inner sep=0.1mm,align=center},
   img/.style={inner sep=0mm,outer sep=0mm},
-  fig_label/.style={txt,anchor=south west,font=\labelfont\bfseries},
+  axis_label/.style={txt,color=black,anchor=south west,font=\labelfont\bfseries},
   axis_element/.style={color=black!85},
   axis_line/.style={axis_element,line width=0.8pt},
   plot_line/.style={line width=1.5pt,rounded corners=1pt,line cap=rect,color=C0},
